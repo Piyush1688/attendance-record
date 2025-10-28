@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Attendance Dashboard</title>
+
+  <!-- LINK CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- CHART.JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* SIDEBAR STYLING */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #111827;
+      color: white;
+      transition: transform 0.3s ease;
+      transform: translateX(-250px);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      padding-top: 60px;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar a {
+      padding: 15px 25px;
+      text-decoration: none;
+      color: #e5e7eb;
+      display: block;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+
+    .sidebar a:hover {
+      background: #1f2937;
+    }
+
+    /* Close button inside sidebar */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #e5e7eb;
+    }
+
+    .close-btn:hover {
+      color: #f87171;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      margin-right: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1f2937;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Adjust layout so content doesn't hide under sidebar */
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      padding: 20px;
+    }
+
+    .main-content.shifted {
+      margin-left: 250px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <span class="close-btn" id="close-btn">&times;</span>
+    <a href="#">Dashboard</a>
+    <a href="#">Reports</a>
+    <a href="#">Monthly Data</a>
+    <a href="#">Settings</a>
+    <a href="#" id="logoutLink">Logout</a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <span class="hamburger" id="hamburger">&#9776;</span>
+      <h1>Attendance Dashboard</h1>
+    </div>
+    <div class="header-right">
+      <p id="current-date"></p>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content" id="main-content">
+    <!-- SUMMARY CARDS -->
+    <section class="cards" id="summary-cards">
+      <!-- JS will generate summary cards -->
+    </section>
+
+    <!-- CHARTS -->
+    <section class="charts">
+      <div class="chart-card">
+        <h2>Attendance Trend</h2>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h2>Present vs Absent</h2>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </section>
+
+    <!-- ATTENDANCE TABLE -->
+    <section class="table-section">
+      <h2>Student Attendance</h2>
+      <table id="attendance-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Total Present</th>
+            <th>Total Absent</th>
+            <th>Attendance %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will populate rows -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- SIDEBAR SCRIPT -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById('hamburger');
+    const mainContent = document.getElementById('main-content');
+    const closeBtn = document.getElementById('close-btn');
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.add('active');
+      mainContent.classList.add('shifted');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      mainContent.classList.remove('shifted');
+    });
+
+    // Click outside sidebar closes it
+    mainContent.addEventListener('click', () => {
+      if (sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        mainContent.classList.remove('shifted');
+      }
+    });
+
+    // Set current date
+    document.getElementById("current-date").textContent = new Date().toLocaleDateString();
+  </script>
+
+  <!-- FIREBASE AUTH + DASHBOARD SCRIPTS -->
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>

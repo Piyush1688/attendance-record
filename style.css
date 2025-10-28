@@ -1,0 +1,85 @@
+/* GLOBAL STYLES */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f9;
+  color: #333;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4e73df;
+  color: white;
+  padding: 20px 40px;
+}
+header h1 {
+  margin: 0;
+}
+header p {
+  font-size: 16px;
+}
+
+/* SUMMARY CARDS */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  text-align: center;
+}
+.card h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* CHARTS */
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+.chart-card {
+  background: white;
+  padding: 20px;
+  width: 45%;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* TABLE */
+.table-section {
+  margin: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background: #f8f9fc;
+}
